@@ -1,0 +1,62 @@
+import type { CaseStudy } from '../types'
+
+/**
+ * Reels do portfólio.
+ * Para adicionar um novo, basta incluir um item aqui — o componente não muda.
+ *
+ * ATENÇÃO: os campos `concept` e `production` abaixo são TEXTOS DE EXEMPLO.
+ * Troque pelas informações reais de cada produção.
+ */
+export const cases: CaseStudy[] = [
+  {
+    client: 'Baldessar',
+    title: 'Bastidores & conteúdo',
+    caption: 'Produção audiovisual',
+    poster: '/cases/reel-1.jpg',
+    video: '/cases/reel-1.mp4',
+    duration: '0:44',
+    concept: 'Mostrar o dia a dia da operação por dentro, com ritmo de bastidor e sem cara de comercial.',
+    production: [
+      { label: 'Direção', value: 'MultStory' },
+      { label: 'Captação', value: 'Externa, 1 diária' },
+      { label: 'Câmera', value: 'Mirrorless full frame + estabilizador' },
+      { label: 'Iluminação', value: 'Luz natural' },
+      { label: 'Edição', value: 'Cortes rápidos e color grading' },
+      { label: 'Formato', value: 'Reel vertical 9:16' },
+    ],
+  },
+  {
+    client: 'Jatobá Estofados',
+    title: 'A marca em movimento',
+    caption: 'Social media & branding',
+    poster: '/cases/reel-2.jpg',
+    video: '/cases/reel-2.mp4',
+    duration: '1:54',
+    concept: 'Apresentar o produto em uso, valorizando acabamento e conforto em planos fechados.',
+    production: [
+      { label: 'Direção', value: 'MultStory' },
+      { label: 'Captação', value: 'Showroom, 1 diária' },
+      { label: 'Câmera', value: 'Mirrorless full frame' },
+      { label: 'Lentes', value: '35 mm e 85 mm' },
+      { label: 'Iluminação', value: 'LED contínuo + difusor' },
+      { label: 'Edição', value: 'Montagem, motion e trilha' },
+    ],
+  },
+  {
+    client: 'MultStory',
+    title: 'Quem faz acontecer',
+    caption: 'Institucional',
+    poster: '/cases/reel-3.jpg',
+    video: '/cases/reel-3.mp4',
+    duration: '2:27',
+    concept: 'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
+    production: [
+      { label: 'Direção', value: 'MultStory' },
+      { label: 'Captação', value: 'Estúdio da agência' },
+      { label: 'Câmera', value: 'Mirrorless full frame' },
+      { label: 'Áudio', value: 'Lapela sem fio' },
+      { label: 'Edição', value: 'Montagem, legendas e motion' },
+      { label: 'Equipe', value: 'Time interno' },
+    ],
+  },
+]

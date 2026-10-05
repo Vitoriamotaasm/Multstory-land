@@ -1,0 +1,23 @@
+.header {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/*
+ * O Navbar é fixed e fica por cima do Header.
+ * Por isso não precisamos criar espaço artificial aqui.
+ *
+ * O Hero ocupa a área inteira da primeira seção.
+ */
+.header :deep(.hero) {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+}

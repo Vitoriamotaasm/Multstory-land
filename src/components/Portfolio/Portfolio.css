@@ -1,0 +1,685 @@
+/* =========================================================
+   PORTFOLIO — linha do tempo fotográfica
+========================================================= */
+
+.portfolio {
+  --pf-bg: #070708;
+  --pf-card: #0c0c10;
+  --pf-purple: #8b5cf6;
+  --pf-purple-soft: #a78bfa;
+  --pf-blue: #0044ff;
+  --pf-line: rgba(255, 255, 255, 0.1);
+  --pf-muted: rgba(255, 255, 255, 0.46);
+  --pf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  background: var(--pf-bg);
+  color: #ffffff;
+}
+
+.portfolio__glow {
+  position: absolute;
+  top: -180px;
+  left: 50%;
+
+  width: 900px;
+  height: 520px;
+
+  transform: translateX(-50%);
+
+  background: radial-gradient(
+    closest-side,
+    rgba(139, 92, 246, 0.16),
+    rgba(0, 68, 255, 0.05) 55%,
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+.portfolio__container {
+  position: relative;
+  z-index: 1;
+
+  width: min(1180px, calc(100% - 80px));
+  margin: 0 auto;
+  padding: 120px 0 80px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.portfolio__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 72px;
+
+  text-align: center;
+}
+
+.portfolio__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  color: var(--pf-purple-soft);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.portfolio__eyebrow-line {
+  width: 26px;
+  height: 1px;
+
+  background: var(--pf-purple);
+  opacity: 0.7;
+}
+
+.portfolio__heading {
+  margin: 0;
+
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.portfolio__heading span {
+  background: linear-gradient(90deg, var(--pf-purple-soft), var(--pf-purple) 45%, #4f7bff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.portfolio__intro {
+  max-width: 520px;
+  margin: 18px 0 0;
+
+  color: var(--pf-muted);
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   TRACK + LINHA
+========================================================= */
+
+.portfolio__track {
+  --fill: 0px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 40px;
+}
+
+.portfolio__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+
+  width: 2px;
+
+  transform: translateX(-50%);
+
+  background: var(--pf-line);
+}
+
+.portfolio__line-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: var(--fill);
+
+  background: linear-gradient(to bottom, var(--pf-blue), var(--pf-purple));
+  box-shadow: 0 0 14px rgba(139, 92, 246, 0.7);
+}
+
+/* câmera que percorre a linha */
+.portfolio__lens {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 3;
+
+  display: grid;
+  place-items: center;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, var(--pf-purple), #5b3df0);
+  color: #ffffff;
+
+  box-shadow:
+    0 0 0 6px rgba(139, 92, 246, 0.14),
+    0 0 28px rgba(139, 92, 246, 0.65);
+
+  opacity: 0;
+  transform: translate(-50%, calc(var(--fill) - 50%));
+  transition: opacity 300ms ease;
+  will-change: transform;
+}
+
+.portfolio__lens.is-visible {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.shot {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px minmax(0, 1fr);
+
+  padding-top: 40px;
+}
+
+.shot + .shot {
+  margin-top: -70px;
+}
+
+.shot__card {
+  grid-column: 1;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+
+  background: var(--pf-card);
+
+  opacity: 0.38;
+  transform: translateY(26px);
+  filter: saturate(0.25) brightness(0.7);
+
+  transition:
+    opacity 700ms var(--pf-ease),
+    transform 700ms var(--pf-ease),
+    filter 700ms var(--pf-ease),
+    border-color 400ms ease,
+    box-shadow 400ms ease;
+}
+
+.shot--right .shot__card {
+  grid-column: 3;
+}
+
+.shot.is-active .shot__card {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.shot.is-active .shot__card:hover {
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 24px 60px -30px rgba(139, 92, 246, 0.55);
+}
+
+/* marcador numerado */
+.shot__node {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  transform: translateX(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+
+  background: var(--pf-bg);
+  color: rgba(255, 255, 255, 0.4);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+
+  transition:
+    background 400ms ease,
+    border-color 400ms ease,
+    color 400ms ease,
+    box-shadow 400ms ease;
+}
+
+.shot.is-active .shot__node {
+  border-color: var(--pf-purple);
+  background: #1a1033;
+  color: #ffffff;
+
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.5);
+}
+
+
+/* =========================================================
+   FOTO / VISOR
+========================================================= */
+
+.shot__media {
+  position: relative;
+
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  overflow: hidden;
+
+  border: 0;
+  background: #050506;
+
+  cursor: pointer;
+}
+
+.shot__media:focus-visible {
+  outline: 2px solid var(--pf-purple-soft);
+  outline-offset: -2px;
+}
+
+.shot__poster,
+.shot__video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    opacity 500ms ease,
+    transform 900ms var(--pf-ease);
+}
+
+.shot__video {
+  opacity: 0;
+}
+
+.shot__media:hover .shot__poster,
+.shot__media:focus-visible .shot__poster {
+  transform: scale(1.05);
+}
+
+.shot__media:hover .shot__video,
+.shot__media:focus-visible .shot__video {
+  opacity: 1;
+}
+
+.shot__shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(to top, rgba(7, 7, 8, 0.85), transparent 45%),
+    linear-gradient(to bottom, rgba(7, 7, 8, 0.45), transparent 30%);
+
+  pointer-events: none;
+}
+
+/* cantos do visor */
+.shot__finder {
+  position: absolute;
+  inset: 16px;
+
+  pointer-events: none;
+
+  transition: inset 500ms var(--pf-ease);
+}
+
+.shot__media:hover .shot__finder {
+  inset: 24px;
+}
+
+.shot__finder i {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  border: solid rgba(255, 255, 255, 0.8);
+  border-width: 0;
+}
+
+.shot__finder i:nth-child(1) { top: 0; left: 0; border-top-width: 1.5px; border-left-width: 1.5px; }
+.shot__finder i:nth-child(2) { top: 0; right: 0; border-top-width: 1.5px; border-right-width: 1.5px; }
+.shot__finder i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.shot__finder i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+/* ponto de foco */
+.shot__reticle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 54px;
+  height: 38px;
+
+  transform: translate(-50%, -50%) scale(1.25);
+
+  border: 1px solid var(--pf-purple-soft);
+  border-radius: 3px;
+
+  opacity: 0;
+
+  transition:
+    opacity 300ms ease,
+    transform 500ms var(--pf-ease);
+}
+
+.shot__reticle::after {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+  background: var(--pf-purple-soft);
+}
+
+.shot__media:hover .shot__reticle {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.shot__rec,
+.shot__frame,
+.shot__exif {
+  position: absolute;
+  z-index: 2;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.shot__rec {
+  top: 26px;
+  left: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shot__rec i {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: var(--pf-purple);
+  box-shadow: 0 0 8px var(--pf-purple);
+
+  animation: pf-blink 1.4s steps(2, start) infinite;
+}
+
+.shot__frame {
+  top: 26px;
+  right: 30px;
+}
+
+.shot__exif {
+  left: 30px;
+  bottom: 26px;
+
+  display: flex;
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.shot__exif span + span::before {
+  content: "·";
+
+  margin-right: 12px;
+
+  color: var(--pf-purple-soft);
+}
+
+.shot__open {
+  position: absolute;
+  right: 28px;
+  bottom: 22px;
+  z-index: 2;
+
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
+  background: rgba(10, 10, 10, 0.4);
+  color: #ffffff;
+
+  backdrop-filter: blur(8px);
+
+  transition:
+    background 300ms ease,
+    border-color 300ms ease,
+    transform 400ms var(--pf-ease);
+}
+
+.shot__media:hover .shot__open {
+  transform: scale(1.08);
+
+  border-color: var(--pf-purple);
+  background: var(--pf-purple);
+}
+
+/* flash do disparo */
+.shot__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  background: #ffffff;
+
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shot__flash.is-firing {
+  animation: pf-flash 520ms ease-out;
+}
+
+@keyframes pf-flash {
+  0% { opacity: 0; }
+  12% { opacity: 0.55; }
+  100% { opacity: 0; }
+}
+
+@keyframes pf-blink {
+  50% { opacity: 0.25; }
+}
+
+
+/* =========================================================
+   TEXTO DO CARD
+========================================================= */
+
+.shot__body {
+  padding: 24px 28px 28px;
+}
+
+.shot__client {
+  color: var(--pf-purple-soft);
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.shot__title {
+  margin: 8px 0 0;
+
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.shot__caption {
+  margin: 8px 0 0;
+
+  color: var(--pf-muted);
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.portfolio__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding-top: 56px;
+
+  color: rgba(255, 255, 255, 0.34);
+
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.portfolio__footer-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.portfolio__footer-line {
+  width: 50px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================================================
+   TABLET / MOBILE — linha à esquerda
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .portfolio__container {
+    width: calc(100% - 40px);
+    padding: 84px 0 60px;
+  }
+
+  .portfolio__header {
+    margin-bottom: 44px;
+  }
+
+  .portfolio__intro {
+    font-size: 15px;
+  }
+
+  .portfolio__line,
+  .portfolio__lens,
+  .shot__node {
+    left: 20px;
+  }
+
+  .portfolio__lens {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shot {
+    grid-template-columns: 56px minmax(0, 1fr);
+
+    padding-top: 28px;
+  }
+
+  .shot + .shot {
+    margin-top: 0;
+  }
+
+  .shot__card,
+  .shot--right .shot__card {
+    grid-column: 2;
+  }
+
+  .shot__node {
+    top: 28px;
+
+    width: 38px;
+    height: 38px;
+
+    font-size: 11px;
+  }
+
+  .shot__body {
+    padding: 20px 20px 22px;
+  }
+
+  .shot__title {
+    font-size: 19px;
+  }
+
+  .shot__rec { top: 22px; left: 24px; }
+  .shot__frame { top: 22px; right: 24px; }
+  .shot__exif { left: 24px; bottom: 22px; gap: 8px; font-size: 9px; }
+  .shot__exif span + span::before { margin-right: 8px; }
+  .shot__exif span:nth-child(4) { display: none; }
+  .shot__open { right: 22px; bottom: 16px; width: 34px; height: 34px; }
+
+  .portfolio__footer {
+    flex-wrap: wrap;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .shot__flash.is-firing,
+  .shot__rec i {
+    animation: none;
+  }
+}

@@ -1,0 +1,86 @@
+# ---------------------------------------------------------------
+# Dependências e build
+# ---------------------------------------------------------------
+# Barra final: "node_modules/" pega qualquer nível.
+# "/node_modules" (ancorado) não pegaria um node_modules aninhado.
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# ---------------------------------------------------------------
+# Segredos
+# ---------------------------------------------------------------
+# Este site é 100% estático e hoje não usa variável de ambiente
+# nenhuma. Se algum dia usar: no Vite, só o que tem prefixo VITE_
+# é embutido no bundle do cliente — ou seja, VITE_ é PÚBLICO por
+# definição. Nunca coloque segredo em VITE_*.
+.env
+.env.*
+!.env.example
+
+# Estes não são usados hoje (o backend saiu deste repo), mas ficam
+# como rede de segurança: o README aponta a pasta de restauração do
+# backend, que contém uma chave de service account do Google. Sem
+# estas linhas, restaurar o backend jogaria a chave no commit.
+credentials/
+*.pem
+*.key
+*token.json
+service-account*.json
+
+# ---------------------------------------------------------------
+# Windows — o Explorer cria Thumbs.db sozinho dentro de qualquer
+# pasta com imagem, e public/team/ é exatamente isso. O template
+# padrão do Vite só cobre .DS_Store (macOS).
+# ---------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# ---------------------------------------------------------------
+# Editores
+# ---------------------------------------------------------------
+/.vscode/*
+!/.vscode/extensions.json
+/.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ---------------------------------------------------------------
+# Logs
+# ---------------------------------------------------------------
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---------------------------------------------------------------
+# Backup fora do repo
+# ---------------------------------------------------------------
+# Esta pasta guarda o backend removido, o bundle do histórico antigo
+# e os originais das fotos (~300 MB), além de .env e credentials com
+# chaves reais. Hoje ela fica FORA do repositório, um nível acima.
+# A regra é só uma rede de segurança: se alguém movê-la para dentro
+# de novo, o git não a commita por acidente.
+adrian_assets_fora_do_repo/
+
+# ---------------------------------------------------------------
+# Mídia bruta / binários que não pertencem ao repo
+# ---------------------------------------------------------------
+# Padrões ANCORADOS (barra inicial) = só a raiz. Sem a barra,
+# "*.mp4" casaria public/hero-bg.mp4 e public/banner.mp4 e tiraria
+# os vídeos do deploy — o site subiria sem o hero. Não remova a
+# barra inicial destes três.
+/*.mp4
+/*.zip
+/*.exe

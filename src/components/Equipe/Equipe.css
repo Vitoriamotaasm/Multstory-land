@@ -1,0 +1,23 @@
+/* Team carousel animation belongs to the Team component. */
+.equipe {
+  position: relative;
+}
+
+.team-track {
+  animation: teamScroll 30s linear infinite;
+}
+
+.team-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes teamScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-track {
+    animation: none;
+  }
+}

@@ -1,0 +1,6 @@
+/* Shared magnetic button styles. */
+.magnetic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

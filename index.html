@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR" class="is-loading intro-hold">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MultStory — marketing de alta performance, social media, audiovisual, tráfego pago e design." />
+    <link rel="icon" href="/favicon.svg" />
+    <title>MultStory — Marketing de alta performance</title>
+
+    <!--
+      INTRO — parte 1 (loading)
+      Uma linha de luz desenha o M da logo. Roda só com CSS, antes do JS carregar.
+      A continuação (perna direita → quadrado do hero, setas nos M, encaixe na navbar)
+      é controlada por src/intro/intro.ts.
+    -->
+    <style>
+      html.is-loading { overflow: hidden; }
+
+      /* segura as entradas do hero até a linha sair do M */
+      html.intro-hold #app .reveal,
+      html.intro-hold #app .hero__visual-fade,
+      html.intro-hold #app .hero__title--enter { animation-play-state: paused; }
+
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        background-color: #000;
+        transition: background-color .9s ease;
+      }
+      #preloader.is-open { background-color: transparent; pointer-events: none; }
+
+      /* linha que sai da perna direita do M (coordenadas em px da janela) */
+      #intro-line {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+      }
+      #intro-line path { fill: none; stroke-linecap: round; opacity: 0; }
+      #intro-conn, #intro-arrow {
+        stroke: #9dbaf7;
+        stroke-width: 1.5;
+        filter: drop-shadow(0 0 5px rgba(90, 140, 255, .9));
+      }
+      #intro-conn-glow { stroke: #5f8dff; stroke-width: 12; filter: blur(5px); }
+      #intro-conn-dot  { stroke: #fff; stroke-width: 3.5; }
+      #intro-arrow-head {
+        stroke: #f1f5ff;
+        stroke-width: 2.5;
+        stroke-linejoin: round;
+        filter: drop-shadow(0 0 5px rgba(110, 150, 255, 1));
+      }
+
+      /* o M */
+      #intro-m {
+        grid-area: 1 / 1;
+        width: clamp(88px, 14vw, 140px);
+        height: auto;
+        overflow: visible;
+        transform-origin: 0 0;
+        will-change: transform;
+      }
+      #intro-m .m-glow {
+        filter: drop-shadow(0 0 7px rgba(86, 134, 230, .6));
+        transition: filter .7s ease;
+      }
+      #intro-m.is-docking .m-glow { filter: drop-shadow(0 0 0 rgba(86, 134, 230, 0)); }
+      #intro-m .m-shape path { fill: #4674C4; stroke: #4674C4; stroke-width: 20; }
+
+      /* máscara: o M só aparece por onde a luz já passou */
+      .m-reveal, .m-reveal-head { fill: none; stroke: #fff; }
+      .m-reveal {
+        stroke-width: 1300;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 15913 17913;
+        stroke-dashoffset: 16613;
+        animation: m-draw 1700ms linear forwards;
+      }
+      .m-reveal-head {
+        stroke-width: 2100;
+        stroke-dasharray: 1262 1262;
+        stroke-dashoffset: 1262;
+        animation: m-draw-head 1700ms linear forwards;
+      }
+
+      /* a luz: ponto com glow + rastro, andando pelo traçado do M */
+      .m-spark {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: opacity .12s linear;
+      }
+      .m-spark--glow  { stroke: #6f9bff; stroke-width: 1500; stroke-dasharray: 1 99999;    stroke-dashoffset: 1;    opacity: .85; animation: m-spark-glow  1700ms linear infinite; }
+      .m-spark--trail { stroke: #a9c4ff; stroke-width: 150;  stroke-dasharray: 2400 99999; stroke-dashoffset: 2400; opacity: .55; animation: m-spark-trail 1700ms linear infinite; }
+      .m-spark--core  { stroke: #fff;    stroke-width: 130;  stroke-dasharray: 700 99999;  stroke-dashoffset: 700;  animation: m-spark-core 1700ms linear infinite; }
+      #intro-m.is-released .m-spark { opacity: 0; }
+
+      @keyframes m-draw        { to { stroke-dashoffset: 0; } }
+      @keyframes m-draw-head   { 0%, 62.7% { stroke-dashoffset: 1262; } 70.6%, 100% { stroke-dashoffset: 0; } }
+      @keyframes m-spark-glow  { to { stroke-dashoffset: -15912; } }
+      @keyframes m-spark-trail { to { stroke-dashoffset: -13513; } }
+      @keyframes m-spark-core  { to { stroke-dashoffset: -15213; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .m-reveal, .m-reveal-head { animation: none; stroke-dashoffset: 0; }
+        .m-spark { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader" role="status" aria-label="Carregando MultStory">
+      <svg id="intro-line" aria-hidden="true">
+        <path id="intro-conn-glow" />
+        <path id="intro-conn" />
+        <path id="intro-conn-dot" />
+        <path id="intro-arrow" />
+        <path id="intro-arrow-head" />
+      </svg>
+
+      <!-- data-exit: ponta da perna direita (x y) e direção em que a linha sai dela
+           data-tip:  ponta da seta do M (x y) e direção em que a seta sai dela -->
+      <svg id="intro-m" xmlns="http://www.w3.org/2000/svg" viewBox="2112 6300 5919 4833"
+           data-exit="7500 10600 0.313 0.950" data-tip="6330 6700 0.311 -0.950" aria-hidden="true">
+        <defs>
+          <path id="m-trace" d="M2650 10560 L3800 7050 L5110 10560 L6290 6950 C6693 5715 6495 7535 6960 8960 L7500 10600" />
+          <mask id="m-mask" maskUnits="userSpaceOnUse" x="1000" y="5000" width="8200" height="7400">
+            <use href="#m-trace" class="m-reveal" />
+            <path class="m-reveal-head" d="M5900 8150 L6290 6950" />
+          </mask>
+          <filter id="m-blur" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="380" />
+          </filter>
+        </defs>
+
+        <g class="m-glow">
+          <g class="m-shape" mask="url(#m-mask)">
+            <path d="M6447.75 6339.68c109.42,16.93 182.15,78.66 218.17,185.2 104.14,307.99 210.56,622.68 319.26,944.07 22.3,65.78 33.7,110.35 34.18,133.69 0.96,46.85 -11.75,90.5 -38.15,130.93 -68.83,105.58 -166.75,140.32 -293.75,104.22 -51.26,-14.6 -104.69,-31.21 -160.29,-49.82 -124.11,-21.1 -250.91,-55.28 -380.39,-102.54 -200.25,-73 -363.91,-133.77 -490.99,-182.31 -2.64,-0.89 -4.88,-1.42 -7.12,-1.71l-18.87 -2.26c-88.21,-23.1 -174.85,-47.41 -230.57,-116.13 -65.23,-80.39 -71.97,-189.17 -21.54,-280.75 16.04,-29.28 60.97,-71.72 134.78,-127.32 20.38,-15.4 274.89,-210.39 763.55,-584.97 32.9,-25.27 74.89,-42.04 126,-50.3l45.73 0z" />
+            <path d="M4557.69 7730.2c-61.77,-86.16 -118.05,-154.59 -168.83,-205.3 -23.91,-23.83 -91.06,-84.88 -201.45,-183.16 -43.24,-38.5 -107.7,-110.75 -193.39,-216.72 -1.85,-2.23 -4.33,-3.7 -7.06,-4.23l-83.79 -15.39c-4.85,-0.93 -8.45,-4.82 -9.04,-9.64l-20.32 -161.48c-1.03,-8.05 -7.88,-14.08 -15.99,-14.08 -0.01,0 -0.01,0 -0.01,0l-153.32 0c0,0 -0.01,0 -0.01,0 -5.24,0 -9.54,-4.15 -9.74,-9.39 -2.49,-73.65 -1.69,-147.41 2.41,-221.3 1.04,-19.42 -2.73,-44.41 -11.31,-74.97 192.9,-69.08 413.36,1.2 527.68,165.82 26.24,37.71 58.17,111.56 95.79,221.55 82.96,242.36 165.75,485.12 248.38,728.29z" />
+            <path d="M3685.84 6614.54c8.58,30.56 12.35,55.55 11.31,74.97 -4.1,73.89 -4.9,147.65 -2.41,221.3 0.2,5.24 4.5,9.39 9.74,9.39 0,0 0.01,0 0.01,0l153.31 0c0.01,0 0.01,0 0.02,0 8.11,0 14.96,6.03 15.99,14.07l20.33 161.62c0.58,4.69 4.18,8.58 8.89,9.49l84.02 15.42c2.64,0.52 5.12,1.99 6.92,4.15 85.72,106.02 150.2,178.29 193.44,216.79 110.39,98.28 177.54,159.33 201.45,183.16 50.78,50.71 107.06,119.14 168.83,205.3l311.68 910.97c-121.62,-10.83 -216.69,-22.94 -285.2,-36.34 -282.8,-55.23 -559.58,-191.82 -815.06,-338.51l-66.79 -181.96c-0.15,-0.32 -0.27,-0.72 -0.36,-1.12 -5.14,-24.84 -9.39,-42.16 -12.76,-51.95 -80.22,-234.82 -125.63,-369.12 -136.22,-402.9 -14.28,-45.32 -41.36,-122.86 -81.23,-232.61 -28.64,-78.62 -54.35,-156.69 -77.14,-234.18 -11.07,-37.39 -15.84,-60.65 -14.32,-69.8 6.42,-38.83 4.5,-73.73 -5.77,-104.69 17.65,-55.2 29.48,-90.42 35.5,-105.66 50.78,-129.25 142.72,-218.22 275.82,-266.91z" />
+            <path d="M3769.11 8266.32l71.6 210.11 -393.15 1140.94c-157.72,-132.06 -265.58,-220.51 -323.59,-265.35 -128.04,-99 -279.35,-200.25 -453.92,-303.74l704.47 -2061.17c10.27,30.96 12.19,65.86 5.77,104.69 -1.52,9.15 3.25,32.41 14.32,69.8 22.79,77.49 48.5,155.56 77.14,234.18 39.87,109.75 66.95,187.29 81.23,232.61 10.59,33.78 56,168.08 136.22,402.9 3.37,9.79 7.62,27.08 12.76,51.87 0.09,0.48 0.21,0.88 0.37,1.28l66.78 181.88z" />
+            <path d="M6527.17 7787.97l-496.4 1449.6c-140.92,100.01 -271.61,59.33 -416.62,-1.44 -168.55,-70.6 -321.78,-162.7 -459.69,-276.3 163.18,-479.11 327.16,-958.62 491.95,-1438.54 2.64,-7.7 2.44,-13.12 -0.6,-16.24 -3.21,-3.29 -8.55,-5.26 -16.01,-5.9l19.37 2.29c1.74,0.26 3.98,0.79 6.15,1.55 127.39,48.62 291.21,109.44 491.46,182.44 129.48,47.26 256.28,81.44 380.39,102.54z" />
+            <path d="M4869.37 8641.17l192.67 564.52c0.56,1.65 2.13,2.76 3.88,2.76 1.7,0 3.23,-1.05 3.83,-2.65l84.71 -245.97c137.91,113.6 291.14,205.7 459.69,276.3 145.01,60.77 275.7,101.45 416.62,1.44l-259.33 757.42c-96.92,-20.37 -184.84,-60.17 -263.79,-119.38 -171.28,-128.2 -349.54,-242.88 -534.78,-344.04 -0.12,-0.08 -0.29,-0.17 -0.47,-0.25 -3.43,-1.61 -7.54,-0.07 -9.17,3.42 -0.07,0.16 -0.14,0.33 -0.2,0.5l-65.38 182.73c-0.27,0.53 -0.42,1.07 -0.49,1.62 -1.44,9.99 -6.57,26.9 -15.39,50.73 -25.92,70.6 -52.31,141.6 -79.18,213 -150.59,-21.83 -301.41,-27.72 -452.48,-17.69l-509.4 -1489.2 -71.6 -210.11c255.48,146.69 532.26,283.28 815.06,338.51 68.51,13.4 163.58,25.51 285.2,36.34z" />
+            <path d="M7671.48 9628.07c-318.78,-47.17 -665.48,-57.39 -986.66,-44.64 -55.2,-160.05 -109.44,-320.7 -162.7,-481.96 -45.41,-137.35 -32.62,-265.55 38.38,-384.6 88.94,-149.1 251.03,-233.7 423.6,-223.23 141.64,8.54 268.23,82.55 349.83,196.87 22.14,30.97 51.22,98.96 87.24,203.98 83.68,244.21 167.11,488.73 250.31,733.58z" />
+            <path d="M3447.56 9617.37l-179.18 523.35c-113.84,-141.27 -266.43,-236.47 -435.63,-295.79 -129.41,-45.41 -257.53,-94.71 -384.36,-147.9l221.66 -648.75c174.57,103.49 325.88,204.74 453.92,303.74 58.01,44.84 165.87,133.29 323.59,265.35z" />
+            <path d="M5771.44 9994.99l-182.2 533.23c-76.85,45.88 -152.75,43.52 -227.68,-7.1 -52.47,-35.54 -104.05,-72.37 -154.75,-110.48 -148.38,-111.55 -301.93,-158.36 -488.1,-183.27l83.88 -244.05c26.87,-71.4 53.26,-142.4 79.18,-213 8.82,-23.83 13.96,-40.76 15.4,-50.78 0.06,-0.5 0.21,-1.04 0.45,-1.52l65.38 -182.73c0.09,-0.22 0.16,-0.39 0.23,-0.55 1.63,-3.49 5.74,-5.03 9.17,-3.42 0.18,0.08 0.35,0.17 0.52,0.27 185.21,101.15 363.45,215.82 534.73,344.02 78.95,59.21 166.87,99.01 263.79,119.38z" />
+            <path d="M7671.48 9628.07l206.26 601.94c-84.16,20.7 -167.91,42.09 -251.27,64.14 -126.11,33.3 -254.43,48.42 -384.96,45.37 -99.17,-2.33 -199.41,-4.85 -300.73,-7.58l-255.96 -748.51c321.18,-12.75 667.88,-2.53 986.66,44.64z" />
+            <path d="M2448.39 9697.03c126.83,53.19 254.95,102.49 384.36,147.9 169.2,59.32 321.79,154.52 435.63,295.79 -60.49,177.38 -121.23,355.49 -182.2,534.31 -40.83,119.86 -72.6,195.75 -95.3,227.68 -61.46,86.09 -146.26,146.26 -254.4,180.51 -18.9,6.02 -42.72,6.98 -64.14,9.87l-122.51 0c-230.97,-40.92 -363.51,-181.87 -397.6,-422.87l0 -58.37c11.55,-88.69 38.51,-167.51 72.08,-264.39 75.09,-216.85 149.78,-433.66 224.08,-650.43z" />
+            <path d="M4802.59 9983.32l-83.88 244.05c-19.58,61.93 -39.91,123.82 -61.01,185.68 -22.39,65.55 -35.99,116.85 -40.8,153.91 -6.66,50.71 -8.42,103.94 -5.29,159.69l-261.5 -761.02c151.07,-10.03 301.89,-4.13 452.48,17.69z" />
+            <path d="M5589.24 10528.22c-23.42,73.16 -47.85,145.56 -73.28,217.21 -26.56,75.01 -53.15,130.73 -79.79,167.15 -74.37,101.81 -177.5,161.98 -309.39,180.51l-120.82 0c-156.68,-21.26 -272.57,-101.45 -347.66,-240.56 -20.14,-37.3 -35.7,-79.26 -46.69,-125.88 -3.13,-55.75 -1.37,-108.98 5.29,-159.69 4.81,-37.06 18.41,-88.36 40.8,-153.91 21.1,-61.86 41.43,-123.75 61.01,-185.68 186.17,24.91 339.72,71.72 488.1,183.27 50.7,38.11 102.28,74.94 154.75,110.48 74.93,50.62 150.83,52.98 227.68,7.1z" />
+            <path d="M7877.74 10230.01c27.76,82.96 56.2,165.63 85.32,248.03 92.42,261.25 -49.94,527.8 -313.36,605.66 -19.86,5.9 -43.32,6.14 -64.75,9.39l-104.57 0c-24.43,-2.41 -49.46,-3.85 -71.96,-10.59 -105.1,-31.93 -188.86,-90.34 -251.27,-175.22 -22.06,-30 -45.61,-80.22 -70.64,-150.66 -50.06,-140.8 -98.64,-282.35 -145.73,-424.68 101.32,2.73 201.56,5.25 300.73,7.58 130.52,3.05 258.85,-12.07 384.96,-45.37 83.36,-22.06 167.11,-43.44 251.27,-64.14z" />
+          </g>
+        </g>
+
+        <use href="#m-trace" class="m-spark m-spark--glow" filter="url(#m-blur)" />
+        <use href="#m-trace" class="m-spark m-spark--trail" />
+        <use href="#m-trace" id="intro-spark" class="m-spark m-spark--core" />
+      </svg>
+    </div>
+
+    <script>
+      /* rede de segurança: se o app não assumir a intro, libera o site mesmo assim */
+      setTimeout(function () {
+        if (window.__introStarted) return
+        var el = document.getElementById('preloader')
+        if (el) el.remove()
+        document.documentElement.classList.remove('is-loading', 'intro-hold')
+        document.documentElement.classList.add('intro-done')
+      }, 9000)
+    </script>
+
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

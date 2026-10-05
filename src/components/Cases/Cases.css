@@ -1,0 +1,598 @@
+/* =========================================================
+   CASES
+   ========================================================= */
+
+.cases {
+  position: relative;
+  width: 100%;
+  background: #09090f;
+  color: #fff;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.cases__container {
+  width: min(1320px, calc(100% - 96px));
+  margin: 0 auto;
+  padding: 92px 0 100px;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.cases__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 34px;
+}
+
+.cases__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+/* =========================================================
+   BADGE
+   ========================================================= */
+
+.cases__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 20px;
+  padding: 0 9px;
+
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 999px;
+
+  background: rgba(108, 56, 255, 0.08);
+
+  color: #8b5cf6;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  margin-bottom: 13px;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.cases__title {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(32px, 3.25vw, 44px);
+  font-weight: 700;
+  line-height: 1.08;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   HEADER BUTTON
+   ========================================================= */
+
+.cases__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 32px;
+  padding: 0 15px;
+
+  border: 1px solid rgba(139, 92, 246, 0.38);
+  border-radius: 999px;
+
+  background: rgba(139, 92, 246, 0.025);
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.cases__button:hover {
+  color: #fff;
+  border-color: rgba(139, 92, 246, 0.7);
+  background: rgba(139, 92, 246, 0.08);
+  transform: translateY(-1px);
+}
+
+.cases__button svg {
+  color: #a78bfa;
+  transition: transform 180ms ease;
+}
+
+.cases__button:hover svg {
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.case-card {
+  position: relative;
+
+  min-width: 0;
+
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 8px;
+
+  background: #15141e;
+
+  overflow: hidden;
+
+  transition:
+    transform 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(139, 92, 246, 0.28);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(108, 56, 255, 0.035);
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.case-card__image-wrapper {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1.72 / 1;
+
+  overflow: hidden;
+
+  background: #111116;
+}
+
+.case-card__image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1);
+
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 400ms ease;
+}
+
+.case-card:hover .case-card__image {
+  transform: scale(1.045);
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+   ========================================================= */
+
+.case-card__image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.case-card__arrow {
+  position: absolute;
+
+  top: 11px;
+  right: 11px;
+
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+
+  background: rgba(7, 7, 11, 0.55);
+
+  color: #fff;
+
+  opacity: 0;
+
+  transform: translateY(4px);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.case-card:hover .case-card__arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.case-card__content {
+  padding: 13px 13px 15px;
+}
+
+
+/* =========================================================
+   CATEGORY
+   ========================================================= */
+
+.case-card__category {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #8b5cf6;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.case-card__title {
+  margin: 0 0 7px;
+
+  color: #fff;
+
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: -0.015em;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.case-card__description {
+  margin: 0;
+
+  max-width: 95%;
+
+  color: rgba(255, 255, 255, 0.38);
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   ANIMAÇÕES DE ENTRADA (disparadas ao entrar na tela)
+   A entrada usa opacity/translate/scale/clip-path; os hovers
+   usam transform, então um não interfere no outro.
+   ========================================================= */
+
+/* --- título sobe, botão entra pela direita --- */
+.cases__title,
+.cases__button {
+  opacity: 0;
+}
+
+.cases__title  { translate: 0 28px; }
+.cases__button { translate: 28px 0; }
+
+.cases__title {
+  transition:
+    opacity 700ms ease,
+    translate 800ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.cases__button {
+  transition:
+    opacity 700ms ease 200ms,
+    translate 800ms cubic-bezier(.22, 1, .36, 1) 200ms,
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.cases--visible .cases__title,
+.cases--visible .cases__button {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* --- cards sobem um após o outro --- */
+.case-card {
+  --d: calc(300ms + var(--i, 0) * 140ms);
+
+  opacity: 0;
+  translate: 0 48px;
+
+  transition:
+    opacity 700ms ease,
+    translate 900ms cubic-bezier(.22, 1, .36, 1),
+    transform 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.cases--visible .case-card {
+  opacity: 1;
+  translate: 0 0;
+
+  transition-delay: var(--d), var(--d), 0ms, 0ms, 0ms;
+}
+
+/* --- imagem é revelada de cima para baixo, com leve zoom-out --- */
+.case-card__image-wrapper {
+  clip-path: inset(0 0 100% 0);
+
+  transition: clip-path 1000ms cubic-bezier(.65, 0, .35, 1);
+}
+
+.cases--visible .case-card__image-wrapper {
+  clip-path: inset(0 0 0 0);
+
+  transition-delay: calc(var(--d) + 120ms);
+}
+
+.case-card__image {
+  scale: 1.18;
+
+  transition:
+    scale 1400ms cubic-bezier(.22, 1, .36, 1),
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 400ms ease;
+}
+
+.cases--visible .case-card__image {
+  scale: 1;
+
+  transition-delay: calc(var(--d) + 120ms), 0ms, 0ms;
+}
+
+/* --- categoria, título e descrição aparecem em sequência --- */
+.case-card__category,
+.case-card__title,
+.case-card__description {
+  opacity: 0;
+  translate: 0 14px;
+
+  transition:
+    opacity 600ms ease,
+    translate 700ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.cases--visible .case-card__category,
+.cases--visible .case-card__title,
+.cases--visible .case-card__description {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.cases--visible .case-card__category    { transition-delay: calc(var(--d) + 450ms); }
+.cases--visible .case-card__title       { transition-delay: calc(var(--d) + 540ms); }
+.cases--visible .case-card__description { transition-delay: calc(var(--d) + 630ms); }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .cases__container {
+    width: min(860px, calc(100% - 64px));
+    padding: 78px 0 84px;
+  }
+
+  .cases__title {
+    font-size: 36px;
+  }
+
+  .cases__grid {
+    gap: 10px;
+  }
+
+  .case-card__content {
+    padding: 13px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .cases__container {
+    width: calc(100% - 32px);
+    padding: 68px 0 72px;
+  }
+
+  .cases__header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 28px;
+  }
+
+  .cases__title {
+    font-size: 30px;
+    line-height: 1.08;
+  }
+
+  .cases__button {
+    min-height: 34px;
+  }
+
+  .cases__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .case-card__image-wrapper {
+    aspect-ratio: 1.75 / 1;
+  }
+
+  .case-card__content {
+    padding: 15px 15px 17px;
+  }
+
+  .case-card__category {
+    font-size: 7px;
+  }
+
+  .case-card__title {
+    font-size: 13px;
+  }
+
+  .case-card__description {
+    max-width: 100%;
+    font-size: 8px;
+  }
+
+  .case-card__arrow {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .cases__container {
+    width: calc(100% - 24px);
+  }
+
+  .cases__title {
+    font-size: 27px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .case-card,
+  .case-card__image,
+  .case-card__image-wrapper,
+  .case-card__arrow,
+  .case-card__category,
+  .case-card__title,
+  .case-card__description,
+  .cases__title,
+  .cases__button {
+    opacity: 1;
+    translate: none;
+    scale: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .case-card__arrow {
+    opacity: 0;
+  }
+
+  .case-card:hover .case-card__arrow {
+    opacity: 1;
+  }
+
+  .case-card:hover {
+    transform: none;
+  }
+
+  .case-card:hover .case-card__image {
+    transform: none;
+  }
+
+}
