@@ -2,6 +2,10 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { ArrowUpRight } from 'lucide-vue-next'
 
+import randonImage from "../../assets/foto/randonbaldessar.jpg";
+import rgMotocarImage from "../../assets/foto/rgmotocar.jpg";
+import brHidraulicaImage from "../../assets/foto/brhidraulica.jpg";
+
 interface Case {
   category: string
   title: string
@@ -11,30 +15,44 @@ interface Case {
 
 const cases: Case[] = [
   {
-    category: 'Sany: Máquinas pesadas - Randon: Implementação rodoviária ',
+    category:
+      'Sany: Máquinas pesadas - Randon: Implementação rodoviária',
+
     title: 'RANDON E SANY',
+
     description:
-      'Randon a maior empresa nacional de implementação rodoviária.Sany a segunda maior fabricante de máquinas pesadas do mundo! A Baldessar maior representante do Nordeste dessas duas grandes marcas!',
-    image: './src/assets/foto/randonbaldessar.jpg',
+      'Randon a maior empresa nacional de implementação rodoviária. Sany a segunda maior fabricante de máquinas pesadas do mundo! A Baldessar maior representante do Nordeste dessas duas grandes marcas!',
+
+    image: randonImage,
   },
+
   {
     category: 'Venda de veículos',
+
     title: 'RG MOTOCAR',
+
     description:
-      'Uma das lojas de veículos novos e seminovos mais relevantes de fortaleza Com nossos o serviço chegou a vender 52 veículos em 14 dias',
-    image: '/src/assets/foto/rgmotocar.jpg',
+      'Uma das lojas de veículos novos e seminovos mais relevantes de Fortaleza. Com nosso serviço chegou a vender 52 veículos em 14 dias.',
+
+    image: rgMotocarImage,
   },
+
   {
     category: 'Segmento hidráulico e pneumático',
+
     title: 'BR HIDRÁULICA',
+
     description:
-      'Empresa 100% cearense. Atua no ramo de mangueiras e engates hidráulicos e pneumáticos. Com 3 filiais no Ceará',
-    image: '/src/assets/foto/brhidraulica.jpg',
+      'Empresa 100% cearense. Atua no ramo de mangueiras e engates hidráulicos e pneumáticos. Com 3 filiais no Ceará.',
+
+    image: brHidraulicaImage,
   },
 ]
 
-/* Animações de entrada: disparam quando a seção aparece na tela
-   e reiniciam quando ela sai por completo (mesmo padrão do FAQ). */
+/* =========================================================
+   ANIMAÇÕES DE ENTRADA
+   ========================================================= */
+
 const root = ref<HTMLElement | null>(null)
 const visible = ref(false)
 
@@ -42,6 +60,7 @@ let observer: IntersectionObserver | null = null
 
 onMounted(() => {
   const el = root.value
+
   if (!el) return
 
   if (
@@ -54,11 +73,17 @@ onMounted(() => {
 
   observer = new IntersectionObserver(
     ([entry]) => {
-      if (entry.intersectionRatio >= 0.2) visible.value = true
-      else if (!entry.isIntersecting) visible.value = false
+      if (entry.intersectionRatio >= 0.2) {
+        visible.value = true
+      } else if (!entry.isIntersecting) {
+        visible.value = false
+      }
     },
-    { threshold: [0, 0.2] },
+    {
+      threshold: [0, 0.2],
+    },
   )
+
   observer.observe(el)
 })
 
@@ -80,9 +105,6 @@ onBeforeUnmount(() => {
       <!-- HEADER -->
       <header class="cases__header">
         <div class="cases__heading">
-
-          
-
           <h2
             id="cases-heading"
             class="cases__title"
@@ -91,7 +113,6 @@ onBeforeUnmount(() => {
             <br />
             extraordinárias
           </h2>
-
         </div>
 
         <a
@@ -110,7 +131,6 @@ onBeforeUnmount(() => {
 
       <!-- CASES -->
       <div class="cases__grid">
-
         <article
           v-for="(item, index) in cases"
           :key="item.title"
@@ -118,6 +138,7 @@ onBeforeUnmount(() => {
           :style="{ '--i': index }"
         >
           <div class="case-card__image-wrapper">
+
             <img
               :src="item.image"
               :alt="`Projeto ${item.title}`"
@@ -128,7 +149,7 @@ onBeforeUnmount(() => {
             <div
               class="case-card__image-overlay"
               aria-hidden="true"
-            />
+            ></div>
 
             <span class="case-card__arrow">
               <ArrowUpRight
@@ -136,10 +157,10 @@ onBeforeUnmount(() => {
                 :stroke-width="1.7"
               />
             </span>
+
           </div>
 
           <div class="case-card__content">
-
             <span class="case-card__category">
               {{ item.category }}
             </span>
@@ -151,11 +172,10 @@ onBeforeUnmount(() => {
             <p class="case-card__description">
               {{ item.description }}
             </p>
-
           </div>
         </article>
-
       </div>
+
     </div>
   </section>
 </template>
