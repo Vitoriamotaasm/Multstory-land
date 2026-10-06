@@ -323,21 +323,6 @@ function toggleFaq(index: number) {
               <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
             </svg>
           </a>
-
-          <span aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <rect x="3" y="9" width="3.6" height="12" />
-              <circle cx="4.8" cy="4.8" r="2.1" />
-              <path d="M10 9h3.4v1.7c.6-1.1 1.9-2 3.7-2 3 0 4 2 4 4.9V21h-3.6v-6.2c0-1.4-.4-2.4-1.8-2.4-1.5 0-2.1 1-2.1 2.5V21H10z" />
-            </svg>
-          </span>
-
-          <span aria-label="TikTok">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-              <path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5" />
-              <path d="M14 3c.3 2.6 2 4.3 5 4.6" />
-            </svg>
-          </span>
         </div>
       </div>
 

@@ -7,5 +7,5 @@
 *.svg text
 *.mp4 binary
 *.ico binary
-
 package-lock.json linguist-generated=true -diff
+*.mp4 filter=lfs diff=lfs merge=lfs -text

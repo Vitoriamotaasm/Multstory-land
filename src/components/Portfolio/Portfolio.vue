@@ -95,12 +95,7 @@ onBeforeUnmount(() => {
 
       <!-- HEADER -->
       <header class="portfolio__header">
-        <div class="portfolio__eyebrow">
-          <span class="portfolio__eyebrow-line"></span>
-          <Aperture :size="13" :stroke-width="1.6" aria-hidden="true" />
-          <span>Portfólio</span>
-          <span class="portfolio__eyebrow-line"></span>
-        </div>
+        
 
         <h2 id="portfolio-heading" class="portfolio__heading">
           Trabalhos que <span>ganharam vida.</span>

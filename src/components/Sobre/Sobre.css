@@ -1,252 +1,425 @@
+/* =========================================
+   SEÇÃO SOBRE — MULTSTORY
+========================================= */
+
 .about {
   position: relative;
   width: 100%;
-  background: #08080d;
-  color: #fff;
+  min-height: 100vh;
+  padding: 120px 0;
   overflow: hidden;
+
+  background: #050507;
+  color: #ffffff;
 }
 
+
+/* =========================================
+   CONTAINER
+========================================= */
+
 .about__container {
-  width: min(1180px, calc(100% - 64px));
+  width: min(1180px, calc(100% - 80px));
   margin: 0 auto;
-  padding: 82px 0 84px;
 }
+
+
+/* =========================================
+   LAYOUT PRINCIPAL
+========================================= */
 
 .about__content {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  align-items: center;
-  column-gap: 136px;
 
-  max-width: 1040px;
-  margin: 0 auto;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+
+  align-items: start;
+  gap: 64px;
 }
 
-/* =========================
-   IMAGEM
-========================= */
+
+/* =========================================
+   IMAGEM DA EQUIPE
+========================================= */
 
 .about__media {
-  position: relative;
-  width: 400px;
-  height: 460px;
+  position: sticky;
+  top: 100px;
 
-  overflow: hidden;
-  border-radius: 7px;
-
-  background: #111116;
+  width: 100%;
+  min-width: 0;
+  align-self: start;
 }
 
 .about__image {
   display: block;
 
   width: 100%;
-  height: 100%;
+  height: auto;
 
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center;
 
-  filter: saturate(0.82) contrast(1.05);
+  border-radius: 8px;
+
+  background: #111116;
 
   transition:
-    transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 400ms ease;
+    transform 0.5s ease,
+    border-radius 0.5s ease;
 }
 
 .about__media:hover .about__image {
-  transform: scale(1.035);
-
-  filter: saturate(0.94) contrast(1.05);
+  transform: scale(1.015);
+  border-radius: 12px;
 }
 
-/* =========================
-   TEXTO
-========================= */
+
+/* =========================================
+   CONTEÚDO TEXTUAL
+========================================= */
 
 .about__text {
-  max-width: 590px;
+  min-width: 0;
+  width: 100%;
 }
 
-/* BADGE */
 
-.about__badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+/* =========================================
+   TÍTULO PRINCIPAL
+========================================= */
 
-  min-height: 22px;
+.about__title {
+  max-width: 720px;
 
-  padding: 0 10px;
+  margin: 0 0 32px;
+  padding: 0;
 
-  margin-bottom: 16px;
+  color: #ffffff;
 
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  border-radius: 999px;
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+  font-weight: 700;
 
-  background: rgba(108, 56, 255, 0.08);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
 
-  color: #8b5cf6;
+  text-wrap: balance;
+}
+
+
+/* =========================================
+   DESCRIÇÃO
+========================================= */
+
+.about__description {
+  width: 100%;
+  max-width: 680px;
+}
+
+.about__description p {
+  margin: 0 0 20px;
+  padding: 0;
+
+  color: #92929b;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+}
+
+.about__description p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================
+   SUBTÍTULOS
+========================================= */
+
+.about__description h3 {
+  margin: 48px 0 18px;
+  padding: 0;
+
+  color: #ffffff;
+
+  font-size: 21px;
+  font-weight: 600;
+
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+
+  text-wrap: balance;
+}
+
+.about__description h3:first-child {
+  margin-top: 0;
+}
+
+
+/* =========================================
+   TEXTOS EM DESTAQUE
+========================================= */
+
+.about__description strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   CITAÇÃO
+========================================= */
+
+.about__quote {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 680px;
+
+  margin: 56px 0 0;
+  padding: 8px 0 8px 24px;
+
+  border: 0;
+}
+
+.about__quote-line {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  display: block;
+
+  width: 3px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    180deg,
+    #a855f7 0%,
+    #6366f1 55%,
+    #3b82f6 100%
+  );
+}
+
+.about__quote p {
+  margin: 0 0 20px;
+  padding: 0;
+
+  color: #e4e4eb;
+
+  font-size: 19px;
+  font-weight: 400;
+
+  line-height: 1.7;
+  letter-spacing: -0.015em;
+}
+
+.about__quote cite {
+  display: block;
+
+  color: #92929b;
 
   font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
+  font-weight: 600;
+
+  font-style: normal;
+  line-height: 1.5;
 
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-/* TÍTULO */
 
-.about__title {
-  margin: 0;
+/* =========================================
+   TABLETS
+========================================= */
 
-  max-width: 590px;
+@media (max-width: 1100px) {
+  .about {
+    padding: 100px 0;
+  }
 
-  color: #fff;
-
-  font-size: clamp(28px, 2.6vw, 39px);
-  font-weight: 700;
-
-  line-height: 1.1;
-
-  letter-spacing: -0.04em;
-}
-
-/* DESCRIÇÃO */
-
-.about__description {
-  max-width: 575px;
-
-  margin-top: 20px;
-}
-
-.about__description p {
-  margin: 0;
-
-  color: rgba(255, 255, 255, 0.48);
-
-  font-size: 16px;
-  font-weight: 400;
-
-  line-height: 1.65;
-}
-
-.about__description p + p {
-  margin-top: 14px;
-}
-
-/* =========================
-   CITAÇÃO
-========================= */
-
-.about__quote {
-  display: flex;
-  align-items: stretch;
-
-  gap: 10px;
-
-  max-width: 560px;
-
-  margin: 18px 0 0;
-  padding: 0;
-}
-
-.about__quote-line {
-  flex: 0 0 1px;
-
-  min-height: 30px;
-
-  background: #8b5cf6;
-}
-
-.about__quote p {
-  margin: 0;
-
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 15px;
-  font-weight: 400;
-
-  line-height: 1.55;
-}
-
-/* =========================
-   TABLET
-========================= */
-
-@media (max-width: 900px) {
   .about__container {
-    width: min(760px, calc(100% - 48px));
+    width: min(100% - 64px, 960px);
   }
 
   .about__content {
-    grid-template-columns: 220px minmax(0, 1fr);
-    column-gap: 48px;
-  }
-
-  .about__media {
-    width: 220px;
-    height: 260px;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 40px;
   }
 
   .about__title {
-    font-size: 30px;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+  }
+
+  .about__description p {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .about__description h3 {
+    font-size: 19px;
+  }
+
+  .about__quote p {
+    font-size: 17px;
   }
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-@media (max-width: 700px) {
+/* =========================================
+   TABLET VERTICAL E TELAS MENORES
+========================================= */
+
+@media (max-width: 800px) {
+  .about {
+    min-height: auto;
+    padding: 80px 0;
+  }
+
   .about__container {
-    width: calc(100% - 32px);
-
-    padding: 64px 0 68px;
+    width: min(100% - 48px, 680px);
   }
 
   .about__content {
-    grid-template-columns: 1fr;
-
-    gap: 32px;
-
-    max-width: 480px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
   }
 
   .about__media {
-    width: 100%;
-    height: auto;
+    position: relative;
+    top: auto;
 
-    aspect-ratio: 1.35 / 1;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .about__image {
+    aspect-ratio: 16 / 11;
   }
 
   .about__text {
-    max-width: 100%;
+    width: 100%;
   }
 
   .about__title {
-    font-size: 29px;
+    max-width: 620px;
+
+    margin-bottom: 28px;
+
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    line-height: 1.08;
   }
 
   .about__description {
     max-width: 100%;
   }
+
+  .about__description p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .about__description h3 {
+    margin-top: 40px;
+    margin-bottom: 16px;
+
+    font-size: 20px;
+  }
+
+  .about__quote {
+    margin-top: 44px;
+  }
 }
 
-/* =========================
-   MOBILE PEQUENO
-========================= */
 
-@media (max-width: 420px) {
+/* =========================================
+   CELULARES
+========================================= */
+
+@media (max-width: 480px) {
+  .about {
+    padding: 64px 0;
+  }
+
   .about__container {
-    width: calc(100% - 24px);
+    width: calc(100% - 36px);
+  }
+
+  .about__content {
+    gap: 32px;
+  }
+
+  .about__media {
+    max-width: 100%;
+  }
+
+  .about__image {
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
   }
 
   .about__title {
-    font-size: 26px;
+    margin-bottom: 24px;
+
+    font-size: clamp(2rem, 9vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
   }
 
   .about__description p {
-    font-size: 8px;
+    margin-bottom: 18px;
+
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .about__description h3 {
+    margin-top: 36px;
+    margin-bottom: 14px;
+
+    font-size: 19px;
+    line-height: 1.4;
+  }
+
+  .about__quote {
+    margin-top: 36px;
+    padding-left: 18px;
+  }
+
+  .about__quote p {
+    margin-bottom: 16px;
+
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .about__quote cite {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+}
+
+
+/* =========================================
+   ACESSIBILIDADE
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .about__image {
+    transition: none;
+  }
+
+  .about__media:hover .about__image {
+    transform: none;
   }
 }

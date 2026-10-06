@@ -23,40 +23,52 @@
         <!-- CONTEÚDO -->
         <div class="about__text">
 
-          
-
           <h2
             id="about-heading"
             class="about__title"
           >
             Não somos apenas uma agência.
-            Somos curadores de narrativa e crescimento.
+            Somos parceiros de crescimento.
           </h2>
 
           <div class="about__description">
+
             <p>
-              Na Multstory, acreditamos que marcas sem histórias
-              memoráveis são apenas commodities. Unimos o rigor
-              analítico do tráfego de alta performance à sofisticação
-              impecável do design editorial.
+              Na MultStory, transformamos ideias em marcas que
+              chamam atenção, criam conexão e geram resultados.
             </p>
 
             <p>
-              Seja construindo um branding inovador ou multiplicando
-              o faturamento digital de grandes empresas, focamos no
-              essencial: design audacioso que atrai e performance
-              científica que converte.
+              Unimos estratégia, criatividade, audiovisual, design,
+              tecnologia e performance para construir uma comunicação
+              que faz sua marca ser lembrada e escolhida.
             </p>
+
+            <p>
+              Trabalhamos com contratos mensais de 30 dias, porque
+              acreditamos que nossos clientes devem permanecer
+              conosco pelo valor que entregamos, não por obrigação.
+            </p>
+
+            <h3>Uma parceria de verdade</h3>
+
+            <p>
+              Também não atendemos empresas concorrentes do mesmo
+              segmento. Assim, cada estratégia é pensada com foco
+              total no crescimento de cada cliente.
+            </p>
+
           </div>
 
           <blockquote class="about__quote">
             <span class="about__quote-line"></span>
 
             <p>
-              "A atenção é a moeda mais valiosa do século XXI.
-              Nosso trabalho é garantir que sua marca receba e
-              valorize essa atenção da melhor forma possível."
+              “A atenção é uma das moedas mais valiosas do nosso tempo.
+              Nosso trabalho é transformar atenção em valor para o negócio.”
             </p>
+
+            <cite>MultStory — marketing que impulsiona</cite>
           </blockquote>
 
         </div>

@@ -11,25 +11,25 @@ interface Case {
 
 const cases: Case[] = [
   {
-    category: 'BRANDING & WEB',
-    title: 'Aura Luxury Brand',
+    category: 'Sany: Máquinas pesadas - Randon: Implementação rodoviária ',
+    title: 'RANDON E SANY',
     description:
-      'Redefinição completa da identidade visual e desenvolvimento de e-commerce de alto padrão resultando em 120% de aumento em vendas.',
-    image: './src/assets/foto/project-image.png',
+      'Randon a maior empresa nacional de implementação rodoviária.Sany a segunda maior fabricante de máquinas pesadas do mundo! A Baldessar maior representante do Nordeste dessas duas grandes marcas!',
+    image: './src/assets/foto/randonbaldessar.jpg',
   },
   {
-    category: 'GROWTH & PERFORMANCE',
-    title: 'Nexus Fintech',
+    category: 'Venda de veículos',
+    title: 'RG MOTOCAR',
     description:
-      'Estratégia de aquisição multicanal e funil de tráfego pago que escalou a base de usuários ativos da fintech de 10k para 80k.',
-    image: '/src/assets/foto/nexus-fintech.png',
+      'Uma das lojas de veículos novos e seminovos mais relevantes de fortaleza Com nossos o serviço chegou a vender 52 veículos em 14 dias',
+    image: '/src/assets/foto/rgmotocar.jpg',
   },
   {
-    category: 'BRANDING & SOCIAL MEDIA',
-    title: 'Vora Cosméticos',
+    category: 'Segmento hidráulico e pneumático',
+    title: 'BR HIDRÁULICA',
     description:
-      'Campanha global de reposicionamento com foco no público premium, unindo minimalista e parcerias com influenciadores de elite.',
-    image: '/src/assets/foto/vara-cosmeticos.png',
+      'Empresa 100% cearense. Atua no ramo de mangueiras e engates hidráulicos e pneumáticos. Com 3 filiais no Ceará',
+    image: '/src/assets/foto/brhidraulica.jpg',
   },
 ]
 
