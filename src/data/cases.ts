@@ -1,12 +1,5 @@
 import type { CaseStudy } from '../types'
 
-/**
- * Reels do portfólio.
- * Para adicionar um novo, basta incluir um item aqui — o componente não muda.
- *
- * ATENÇÃO: os campos `concept` e `production` abaixo são TEXTOS DE EXEMPLO.
- * Troque pelas informações reais de cada produção.
- */
 export const cases: CaseStudy[] = [
   {
     client: 'Baldessar',
