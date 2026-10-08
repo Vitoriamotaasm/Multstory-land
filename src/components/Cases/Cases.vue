@@ -2,9 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { ArrowUpRight } from 'lucide-vue-next'
 
-import randonImage from "../../assets/foto/randonbaldessar.jpg";
-import rgMotocarImage from "../../assets/foto/rgmotocar.jpg";
-import brHidraulicaImage from "../../assets/foto/brhidraulica.jpg";
+import { imageUrl } from '../../config/storage'
 
 interface Case {
   category: string
@@ -23,7 +21,7 @@ const cases: Case[] = [
     description:
       'Randon a maior empresa nacional de implementação rodoviária. Sany a segunda maior fabricante de máquinas pesadas do mundo! A Baldessar maior representante do Nordeste dessas duas grandes marcas!',
 
-    image: randonImage,
+    image: imageUrl('randonbaldessar.jpg'),
   },
 
   {
@@ -34,7 +32,7 @@ const cases: Case[] = [
     description:
       'Uma das lojas de veículos novos e seminovos mais relevantes de Fortaleza. Com nosso serviço chegou a vender 52 veículos em 14 dias.',
 
-    image: rgMotocarImage,
+    image: imageUrl('rgmotocar.jpg'),
   },
 
   {
@@ -45,7 +43,7 @@ const cases: Case[] = [
     description:
       'Empresa 100% cearense. Atua no ramo de mangueiras e engates hidráulicos e pneumáticos. Com 3 filiais no Ceará.',
 
-    image: brHidraulicaImage,
+    image: imageUrl('brhidraulica.jpg'),
   },
 ]
 
@@ -104,26 +102,24 @@ onBeforeUnmount(() => {
 
       <!-- HEADER -->
       <header class="cases__header">
-        <div class="cases__heading">
-          <h2
-            id="cases-heading"
-            class="cases__title"
-          >
-            Histórias reais de marcas
-            <br />
-            extraordinárias
-          </h2>
-        </div>
+        <h2
+          id="cases-heading"
+          class="cases__title"
+        >
+          Histórias reais de marcas
+          <br />
+          extraordinárias<span class="cases__title-dot">.</span>
+        </h2>
 
         <a
           href="#cases"
-          class="cases__button"
+          class="cases__link"
         >
-          <span>Ver Todos os Cases</span>
+          <span>Ver todos os cases</span>
 
           <ArrowUpRight
-            :size="13"
-            :stroke-width="1.6"
+            :size="15"
+            :stroke-width="1.8"
             aria-hidden="true"
           />
         </a>
@@ -138,26 +134,12 @@ onBeforeUnmount(() => {
           :style="{ '--i': index }"
         >
           <div class="case-card__image-wrapper">
-
             <img
               :src="item.image"
               :alt="`Projeto ${item.title}`"
               class="case-card__image"
               loading="lazy"
             />
-
-            <div
-              class="case-card__image-overlay"
-              aria-hidden="true"
-            ></div>
-
-            <span class="case-card__arrow">
-              <ArrowUpRight
-                :size="14"
-                :stroke-width="1.7"
-              />
-            </span>
-
           </div>
 
           <div class="case-card__content">
@@ -165,9 +147,18 @@ onBeforeUnmount(() => {
               {{ item.category }}
             </span>
 
-            <h3 class="case-card__title">
-              {{ item.title }}
-            </h3>
+            <div class="case-card__row">
+              <h3 class="case-card__title">
+                {{ item.title }}
+              </h3>
+
+              <ArrowUpRight
+                class="case-card__arrow"
+                :size="18"
+                :stroke-width="1.6"
+                aria-hidden="true"
+              />
+            </div>
 
             <p class="case-card__description">
               {{ item.description }}

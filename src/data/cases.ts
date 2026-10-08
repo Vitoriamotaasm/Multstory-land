@@ -1,14 +1,23 @@
 import type { CaseStudy } from '../types'
+import { casePoster, caseVideo } from '../config/storage'
 
 export const cases: CaseStudy[] = [
   {
     client: 'Baldessar',
+
     title: 'Dia dos Pais',
+
     caption: 'Produção audiovisual',
-    poster: '/cases/reel-1.jpg',
-    video: '/cases/reel-1.mp4',
-    duration: '0:44',
-    concept: 'Mostrar o dia a dia da operação por dentro, com ritmo de bastidor e sem cara de comercial.',
+
+    poster: casePoster('reel-1.jpg'),
+
+    video: caseVideo('reel-1.mp4'),
+
+    duration: '3:17',
+
+    concept:
+      'Mostrar o dia a dia da operação por dentro, com ritmo de bastidor e sem cara de comercial.',
+
     production: [
       { label: 'Direção', value: 'MultStory' },
       { label: 'Captação', value: 'Externa, 1 diária' },
@@ -18,14 +27,23 @@ export const cases: CaseStudy[] = [
       { label: 'Formato', value: 'Reel vertical 9:16' },
     ],
   },
+
   {
     client: 'BR Hidráulica',
+
     title: 'A marca em movimento',
+
     caption: 'Social media & branding',
-    poster: '/cases/reel-2.jpg',
-    video: '/cases/reel-2.mp4',
-    duration: '1:54',
-    concept: 'Apresentar o produto em uso, valorizando acabamento e conforto em planos fechados.',
+
+    poster: casePoster('reel-2.jpg'),
+
+    video: caseVideo('reel-2.mp4'),
+
+    duration: '1:07',
+
+    concept:
+      'Apresentar o produto em uso, valorizando acabamento e conforto em planos fechados.',
+
     production: [
       { label: 'Direção', value: 'MultStory' },
       { label: 'Captação', value: 'Showroom, 1 diária' },
@@ -35,14 +53,23 @@ export const cases: CaseStudy[] = [
       { label: 'Edição', value: 'Montagem, motion e trilha' },
     ],
   },
+
   {
     client: 'Sany',
+
     title: 'Pavimentação',
+
     caption: 'Institucional',
-    poster: '/cases/reel-3.jpg',
-    video: '/cases/reel-3.mp4',
-    duration: '2:27',
-    concept: 'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
+
+    poster: casePoster('reel-3.jpg'),
+
+    video: caseVideo('reel-3.mp4'),
+
+    duration: '1:03',
+
+    concept:
+      'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
+
     production: [
       { label: 'Direção', value: 'MultStory' },
       { label: 'Captação', value: 'Estúdio da agência' },
@@ -52,31 +79,23 @@ export const cases: CaseStudy[] = [
       { label: 'Equipe', value: 'Time interno' },
     ],
   },
+
   {
     client: 'Nipan',
+
     title: 'Institucional',
+
     caption: 'Institucional',
-    poster: '/cases/reel-4.jpg',
-    video: '/cases/reel-4.mp4',
-    duration: '2:27',
-    concept: 'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
-    production: [
-      { label: 'Direção', value: 'MultStory' },
-      { label: 'Captação', value: 'Estúdio da agência' },
-      { label: 'Câmera', value: 'Mirrorless full frame' },
-      { label: 'Áudio', value: 'Lapela sem fio' },
-      { label: 'Edição', value: 'Montagem, legendas e motion' },
-      { label: 'Equipe', value: 'Time interno' },
-    ],
-  },
-  {
-    client: 'RG Motocar',
-    title: 'Video Game',
-    caption: 'Criativo',
-    poster: '/cases/reel-5.jpg',
-    video: '/cases/reel-5.mp4',
-    duration: '2:27',
-    concept: 'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
+
+    poster: casePoster('reel-4.jpg'),
+
+    video: caseVideo('reel-4.mp4'),
+
+    duration: '1:45',
+
+    concept:
+      'Apresentar o time e o jeito de trabalhar da agência com as próprias pessoas em cena.',
+
     production: [
       { label: 'Direção', value: 'MultStory' },
       { label: 'Captação', value: 'Estúdio da agência' },
